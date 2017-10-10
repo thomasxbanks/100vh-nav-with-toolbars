@@ -18,8 +18,14 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      transform: translateY(-100%);
+      position: fixed;
+      width: 100%;
+      transition: ease 300ms;
     }
-
+    main.show {
+      transform: translateY(0);
+    }
     footer {
       padding: 1rem;
       background: tomato;
@@ -38,6 +44,12 @@
   <script type="text/javascript">
   var main = document.querySelector('main')
   var footer = document.querySelector('footer')
+    footer.addEventListener('click', ()=>{
+      main.classList.add('show')
+    })
+    main.addEventListener('click', ()=>{
+      main.classList.remove('show')
+    })
     window.onload = () => {
       var browser = {
         height: window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
