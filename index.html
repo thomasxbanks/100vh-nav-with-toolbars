@@ -7,13 +7,39 @@
   <meta name='viewport' content='width=device-width, initial-scale=1, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0'>
 
   <style media="screen">
+  html {
+    font-size: 18px;
+  }
+  html.scrollBlock {
+    overflow: hidden;
+  }
     body {
       margin: 0;
     }
-
+    #navIcon {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      z-index: 20000;
+      margin: 1rem;
+      font-size: 2rem;
+      color: white;
+      background: rgba(0,0,0,0.6);
+      border: none;
+      -webkit-appearance: none;
+      outline-color: #a1213d;
+    }
     main {
-      padding: 1rem;
-      background: dodgerblue;
+
+    }
+    nav.show {
+      transform: translateY(0);
+    }
+    nav.show ul li a {
+      transform: scale(1);
+    }
+    nav {
+      background: black;
       color: white;
       display: flex;
       align-items: center;
@@ -21,10 +47,24 @@
       transform: translateY(-100%);
       position: fixed;
       width: 100%;
-      transition: ease 300ms;
+      transition: ease-out 300ms;
+      overflow-y: auto;
     }
-    main.show {
-      transform: translateY(0);
+    nav ul {
+      list-style-type: none;
+      padding-left: 0;
+      height: 100%;
+    }
+    nav ul li {
+      text-align: center;
+    }
+    nav ul li a {
+      display: block;
+      color: white;
+      text-decoration: none;
+      padding: 1rem;
+      transform: scale(0);
+      transition: cubic-bezier(.53,-0.34,.36,1.34) 500ms 100ms;
     }
     footer {
       padding: 1rem;
@@ -32,9 +72,39 @@
       color: white;
     }
   </style>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
+  <button id="navIcon" class="material-icons">menu</button>
+  <nav>
+    <ul>
+      <li>
+        <a href="#">Menu Item 1</a>
+      </li>
+      <li>
+        <a href="#">Menu Item 2</a>
+      </li>
+      <li>
+        <a href="#">Menu Item 3</a>
+      </li>
+      <li>
+        <a href="#">Menu Item 4</a>
+      </li>
+      <li>
+        <a href="#">Menu Item 5</a>
+      </li>
+      <li>
+        <a href="#">Menu Item 6</a>
+      </li>
+      <li>
+        <a href="#">Menu Item 7</a>
+      </li>
+      <li>
+        <a href="#">Menu Item 8</a>
+      </li>
+    </ul>
+  </nav>
   <main>
 
   </main>
@@ -44,25 +114,24 @@
   <script type="text/javascript">
   var main = document.querySelector('main')
   var footer = document.querySelector('footer')
-    footer.addEventListener('click', ()=>{
-      main.classList.add('show')
-    })
-    main.addEventListener('click', ()=>{
-      main.classList.remove('show')
+  var navIcon = document.querySelector('#navIcon')
+  var nav = document.querySelector('nav')
+    navIcon.addEventListener('click', ()=>{
+      nav.classList.toggle('show')
+      document.documentElement.classList.toggle('scrollBlock')
+      ;(navIcon.innerText === 'menu') ? navIcon.innerText = 'close' : navIcon.innerText = 'menu'
     })
     window.onload = () => {
       var browser = {
         height: window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
       }
-      main.innerText = `${browser.height}`
-      main.style.height = `${browser.height}px`
+      nav.style.height = `${browser.height}px`
     }
     window.onresize = () => {
       var browser = {
         height: window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
       }
-      main.innerText = `${browser.height}`
-      main.style.height = `${browser.height}px`
+      nav.style.height = `${browser.height}px`
     }
     for (var i = 0; i < 100; i++){
       footer.innerHTML +=
